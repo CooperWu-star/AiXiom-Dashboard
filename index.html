@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AiXiom Education Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo">◎</span>
+          <div>
+            <p class="brand-name">AiXiom Education</p>
+            <p class="brand-tagline">Adaptive learning cockpit</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="#pathways">Pathways</a>
+          <a href="#lessons">Lessons</a>
+          <a href="#practice">Practice</a>
+          <a href="#progress">Progress</a>
+        </nav>
+        <button class="cta" type="button">Start session</button>
+      </header>
+
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">AiXiom Learning Hub</p>
+          <h1>Guide every learner from fundamentals to applied AI mastery.</h1>
+          <p class="lede">
+            Build structured pathways, track learning momentum, and deliver hands-on practice experiences across
+            AiXiom's core pillars.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" type="button">Resume last lesson</button>
+            <button class="ghost" type="button">Assign a cohort</button>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="metric">
+            <span class="metric-value" id="completed-count">0</span>
+            <span class="metric-label">Lessons completed</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value" id="weekly-hours">0h</span>
+            <span class="metric-label">Weekly study time</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">4</span>
+            <span class="metric-label">Active cohorts</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">92%</span>
+            <span class="metric-label">Practice accuracy</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pathways">
+        <div class="section-heading">
+          <h2>AiXiom pathways</h2>
+          <p>Curated sequences that balance theory, systems thinking, and applied lab work.</p>
+        </div>
+        <div class="pathway-grid" id="pathways-grid"></div>
+      </section>
+
+      <section class="section split" id="lessons">
+        <div>
+          <div class="section-heading">
+            <h2>Lesson library</h2>
+            <p>Select a module to preview outcomes, labs, and resources.</p>
+          </div>
+          <div class="lesson-list" id="lesson-list" role="list"></div>
+        </div>
+        <div class="lesson-details" id="lesson-details">
+          <div class="lesson-details-header">
+            <div>
+              <p class="eyebrow" id="lesson-level"></p>
+              <h3 id="lesson-title"></h3>
+            </div>
+            <span class="pill" id="lesson-duration"></span>
+          </div>
+          <p id="lesson-summary"></p>
+          <ul id="lesson-objectives"></ul>
+          <div class="lesson-lab" id="lesson-lab"></div>
+          <div class="lesson-resources" id="lesson-resources"></div>
+          <button class="primary" id="complete-lesson" type="button">Mark lesson complete</button>
+        </div>
+      </section>
+
+      <section class="section split" id="practice">
+        <div>
+          <div class="section-heading">
+            <h2>Applied practice</h2>
+            <p>Use retrieval, evaluation, and deployment drills to lock in learning.</p>
+          </div>
+          <div class="quiz" id="quiz-card">
+            <p class="eyebrow">Checkpoint quiz</p>
+            <h3 id="quiz-question"></h3>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="practice-panel">
+          <h3>Live cohort prompts</h3>
+          <div class="prompt-card">
+            <p>Design a responsible AI policy for an education platform collecting learner analytics.</p>
+            <span class="pill">Ethics & Governance</span>
+          </div>
+          <div class="prompt-card">
+            <p>Draft a system prompt for an AiXiom tutor that adapts to learner confidence scores.</p>
+            <span class="pill">Prompting</span>
+          </div>
+          <div class="prompt-card">
+            <p>Map a data pipeline for capturing lesson progress and feeding dashboards in real time.</p>
+            <span class="pill">Systems</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="progress">
+        <div class="section-heading">
+          <h2>Progress & momentum</h2>
+          <p>Track individual growth and keep cohorts on pace with weekly goals.</p>
+        </div>
+        <div class="progress-grid">
+          <div class="progress-card">
+            <div class="progress-header">
+              <h3>Lesson completion</h3>
+              <span id="progress-count">0 / 0 lessons</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+          </div>
+          <div class="progress-card">
+            <div class="progress-header">
+              <h3>Weekly focus</h3>
+              <span id="weekly-goal">0 / 6 hours</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill accent" id="weekly-fill"></div>
+            </div>
+          </div>
+          <div class="progress-card">
+            <h3>Next recommendations</h3>
+            <ul class="recommendations" id="recommendations"></ul>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>
+          <h4>AiXiom Education</h4>
+          <p>Crafted for coaches, facilitators, and learners designing the future of AI fluency.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#overview">Overview</a>
+          <a href="#pathways">Pathways</a>
+          <a href="#lessons">Lessons</a>
+          <a href="#practice">Practice</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
