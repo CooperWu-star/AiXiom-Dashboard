@@ -178,6 +178,7 @@ const loadCompletedLessons = () => {
       state.completedLessons = new Set(parsed);
     }
   } catch (error) {
+    console.error("Failed to parse completed lessons:", error);
     window.localStorage.removeItem(storageKey);
   }
 };
