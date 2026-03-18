@@ -4,8 +4,8 @@
   "description": "AiXiom education dashboard experience",
   "main": "app.js",
   "scripts": {
-    "dev": "python -m http.server 5173",
-    "start": "python -m http.server 5173",
+    "dev": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 5173",
     "test": "echo \"No tests specified\""
   },
   "repository": {

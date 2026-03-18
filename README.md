@@ -28,7 +28,7 @@ npm start
 The npm scripts use Python's built-in HTTP server (requires Python 3). You can also run it directly:
 
 ```bash
-python -m http.server 5173
+python3 -m http.server 5173
 ```
 
 Then visit `http://localhost:5173`.
