@@ -25,7 +25,7 @@ Or:
 npm start
 ```
 
-Or with Python:
+The npm scripts use Python's built-in HTTP server (requires Python 3). You can also run it directly:
 
 ```bash
 python -m http.server 5173
