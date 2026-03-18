@@ -19,4 +19,16 @@ Open `index.html` directly in a browser or run a local server:
 npm run dev
 ```
 
+Or:
+
+```bash
+npm start
+```
+
+Or with Python:
+
+```bash
+python -m http.server 5173
+```
+
 Then visit `http://localhost:5173`.
