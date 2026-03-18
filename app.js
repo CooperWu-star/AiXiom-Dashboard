@@ -138,6 +138,7 @@ const recommendations = [
 ];
 
 const storageKey = "aixiom-completed-lessons";
+const activeLessonKey = "aixiom-active-lesson";
 const weeklyGoalHours = 6;
 const weeklyStudyHours = 4.5;
 
@@ -161,10 +162,24 @@ const pathwaysGrid = document.querySelector("#pathways-grid");
 const quizQuestion = document.querySelector("#quiz-question");
 const quizOptions = document.querySelector("#quiz-options");
 const quizFeedback = document.querySelector("#quiz-feedback");
+const startSessionButton = document.querySelector(".cta");
+const resumeLessonButton = document.querySelector(".hero-actions .primary");
+const assignCohortButton = document.querySelector(".hero-actions .ghost");
+const internalLinks = document.querySelectorAll('a[href^="#"]');
 
 const state = {
   activeLessonId: lessons[0].id,
   completedLessons: new Set(),
+};
+
+const loadActiveLesson = () => {
+  const stored = window.localStorage.getItem(activeLessonKey);
+  if (!stored) {
+    return;
+  }
+  if (lessons.some((lesson) => lesson.id === stored)) {
+    state.activeLessonId = stored;
+  }
 };
 
 const loadCompletedLessons = () => {
@@ -185,6 +200,36 @@ const loadCompletedLessons = () => {
 
 const persistCompletedLessons = () => {
   window.localStorage.setItem(storageKey, JSON.stringify([...state.completedLessons]));
+};
+
+const persistActiveLesson = () => {
+  window.localStorage.setItem(activeLessonKey, state.activeLessonId);
+};
+
+const scrollToSection = (selector) => {
+  const section = document.querySelector(selector);
+  if (!section) {
+    return;
+  }
+  section.scrollIntoView({ behavior: "smooth" });
+};
+
+const getNextLessonId = () => {
+  const nextLesson = lessons.find((lesson) => !state.completedLessons.has(lesson.id));
+  return nextLesson?.id ?? lessons[0]?.id ?? "";
+};
+
+const addRecommendation = (text) => {
+  if (!recommendationsList) {
+    return;
+  }
+  const exists = [...recommendationsList.querySelectorAll("li")].some((item) => item.textContent === text);
+  if (exists) {
+    return;
+  }
+  const li = document.createElement("li");
+  li.textContent = text;
+  recommendationsList.prepend(li);
 };
 
 const renderPathways = () => {
@@ -214,11 +259,12 @@ const renderRecommendations = () => {
 };
 
 const setActiveLesson = (lessonId) => {
-  state.activeLessonId = lessonId;
   const lesson = lessons.find((item) => item.id === lessonId);
   if (!lesson) {
     return;
   }
+  state.activeLessonId = lessonId;
+  persistActiveLesson();
   lessonTitle.textContent = lesson.title;
   lessonLevel.textContent = lesson.level;
   lessonDuration.textContent = lesson.duration;
@@ -301,11 +347,42 @@ const handleLessonCompletion = () => {
 };
 
 loadCompletedLessons();
+loadActiveLesson();
 renderPathways();
 renderLessonList();
 setActiveLesson(state.activeLessonId);
 renderQuiz();
 renderRecommendations();
 updateProgress();
+
+startSessionButton?.addEventListener("click", () => {
+  setActiveLesson(getNextLessonId());
+  scrollToSection("#lessons");
+});
+
+resumeLessonButton?.addEventListener("click", () => {
+  setActiveLesson(state.activeLessonId);
+  scrollToSection("#lessons");
+});
+
+assignCohortButton?.addEventListener("click", () => {
+  addRecommendation("Assign cohorts for the Foundations pathway kickoff.");
+  scrollToSection("#progress");
+});
+
+internalLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const targetId = link.getAttribute("href");
+    if (!targetId || !targetId.startsWith("#")) {
+      return;
+    }
+    const target = document.querySelector(targetId);
+    if (!target) {
+      return;
+    }
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
+  });
+});
 
 completeLessonButton.addEventListener("click", handleLessonCompletion);
